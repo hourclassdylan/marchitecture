@@ -1,8 +1,9 @@
 // src/components/MarketMapDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { supabase } from '../supabaseClient';
+import './MarketMapDetail.css';
 
 const MarketMapDetail = () => {
   const { id } = useParams();
@@ -11,12 +12,13 @@ const MarketMapDetail = () => {
   const [subcategories, setSubcategories] = useState({});
   const [companies, setCompanies] = useState({});
   const [loading, setLoading] = useState(true);
+  const [zoomLevel, setZoomLevel] = useState(3);
+  const [selectedCompany, setSelectedCompany] = useState(null);
 
   useEffect(() => {
     const fetchMarketMapData = async () => {
       setLoading(true);
 
-      // Fetch market map details
       const { data: marketMapData, error: marketMapError } = await supabase
         .from('market_maps')
         .select('*')
@@ -27,7 +29,6 @@ const MarketMapDetail = () => {
       } else {
         setMarketMap(marketMapData);
 
-        // Fetch sections for the market map
         const { data: sectionsData, error: sectionsError } = await supabase
           .from('sections')
           .select('*')
@@ -61,7 +62,7 @@ const MarketMapDetail = () => {
   const loadCompanies = async (subcategoryId) => {
     const { data, error } = await supabase
       .from('companies')
-      .select('*')
+      .select('id, name, description, image_url')
       .eq('subcategory_id', subcategoryId);
     if (error) {
       console.error('Error fetching companies:', error);
@@ -87,17 +88,36 @@ const MarketMapDetail = () => {
     setSections(newSections);
   };
 
+  const incrementZoomLevel = () => {
+    if (zoomLevel < 5) {
+      setZoomLevel(zoomLevel + 1);
+    }
+  };
+
+  const decrementZoomLevel = () => {
+    if (zoomLevel > 0) {
+      setZoomLevel(zoomLevel - 1);
+    }
+  };
+
+  const handleCompanyClick = (company) => {
+    setSelectedCompany(company);
+  };
+
+  const handleModalClose = () => {
+    setSelectedCompany(null);
+  };
+
   if (loading) return <p>Loading...</p>;
   if (!marketMap) return <p>Market Map not found.</p>;
 
-  const sectionColors = ['#e0f7fa', '#f1f8e9', '#ffe0b2', '#ffebee'];
+  const sectionColors = ['#e0f7fa', '#f1f8e9', '#ffe0b2', '#ffebee'];  // Define colors here
 
   return (
     <div className="market-map-detail">
-      <h2>{marketMap.name}</h2>
-
       <div className="sidebar">
         <h2>Sections</h2>
+        <p className="drag-notice"><i>Drag the sections to rearrange the order</i></p>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="sections">
             {(provided) => (
@@ -108,12 +128,15 @@ const MarketMapDetail = () => {
               >
                 {sections.map((section, index) => (
                   <Draggable key={section.id} draggableId={section.id.toString()} index={index}>
-                    {(provided) => (
+                    {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className="section-link"
+                        className={`section-link ${snapshot.isDragging ? 'dragging' : ''}`}
+                        style={{
+                          ...provided.draggableProps.style,
+                        }}
                         onClick={() => handleScrollToSection(section.id)}
                       >
                         {section.name}
@@ -126,9 +149,11 @@ const MarketMapDetail = () => {
             )}
           </Droppable>
         </DragDropContext>
+        <button onClick={incrementZoomLevel}>Zoom In</button>
+        <button onClick={decrementZoomLevel}>Zoom Out</button>
       </div>
 
-      <div className="main-content">
+      <div className={`main-content zoom-${zoomLevel}`}>
         <div className="section-container">
           {sections.map((section, index) => (
             <div
@@ -139,14 +164,25 @@ const MarketMapDetail = () => {
             >
               <h3>{section.name}</h3>
               <div className="subcategory-container">
-                {(subcategories[section.id] || []).map((subcategory) => (
+                {subcategories[section.id]?.map((subcategory) => (
                   <div key={subcategory.id} className="subcategory-box">
                     <h4>{subcategory.name}</h4>
+                    <p>{subcategory.description}</p>
                     <div className="company-container">
-                      {(companies[subcategory.id] || []).map((company) => (
-                        <div key={company.id} className="company-box">
-                          <p><strong>{company.name}</strong></p>
-                          <p><a href={company.website} target="_blank" rel="noopener noreferrer">{company.website}</a></p>
+                      {companies[subcategory.id]?.map((company) => (
+                        <div
+                          key={company.id}
+                          className="company-box"
+                          onClick={() => handleCompanyClick(company)}
+                        >
+                          {company.image_url && (
+                            <img
+                              src={company.image_url}
+                              alt={company.name}
+                              className="company-logo"
+                            />
+                          )}
+                          <p className="company-name">{company.name}</p>
                         </div>
                       ))}
                     </div>
@@ -157,6 +193,22 @@ const MarketMapDetail = () => {
           ))}
         </div>
       </div>
+
+      {selectedCompany && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleModalClose}>&times;</span>
+            <h2>{selectedCompany.name}</h2>
+            <p><strong>Website:</strong> <a href={selectedCompany.website} target="_blank" rel="noopener noreferrer">{selectedCompany.website}</a></p>
+            <p><strong>Description:</strong> {selectedCompany.description}</p>
+            <p><strong>Location:</strong> {selectedCompany.location}</p>
+            <p><strong>Founded:</strong> {selectedCompany.founded}</p>
+            <p><strong>Industry:</strong> {selectedCompany.industry}</p>
+            <p><strong>Employee Count:</strong> {selectedCompany.employee_count}</p>
+            <p><strong>Revenue:</strong> {selectedCompany.revenue}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

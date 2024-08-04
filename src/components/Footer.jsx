@@ -1,9 +1,10 @@
 // src/components/Footer.jsx
 import React from 'react';
+import './Footer.css';
 
 const Footer = () => (
   <footer>
-    <p>&copy; 2023 Marchitecture. All rights reserved.</p>
+    <p>© Marchitecture 2024</p>
   </footer>
 );
 

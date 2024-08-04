@@ -1,0 +1,256 @@
+/* src/components/MarketMapDetail.css */
+
+.market-map-detail {
+  display: flex;
+  flex-grow: 1;
+}
+
+.sidebar {
+  position: fixed; /* Make the sidebar fixed */
+  top: 70px; /* Start below the header */
+  left: 0;
+  bottom: 10px; /* Provide some space from the footer */
+  width: 220px;
+  background-color: #fefefe;
+  border-right: 1px solid #ddd;
+  height: calc(100vh - 80px); /* Adjust height considering header and footer spaces */
+  overflow-y: auto;
+  z-index: 10;
+  box-sizing: border-box; /* Include padding in width/height */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Add subtle shadow for depth */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Add padding for better spacing */
+}
+
+.sidebar h2 {
+  margin: 0;
+  padding: 20px 0;
+  font-size: 1.25em;
+  color: #333;
+  text-align: center;
+  background-color: #fefefe;
+}
+
+.drag-notice {
+  font-size: 0.9em;
+  color: #666;
+  text-align: center;
+  padding: 10px;
+  background-color: #fefefe;
+  border-bottom: 1px solid #ddd;
+}
+
+.section-links-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-link {
+  padding: 15px 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth hover effect */
+}
+
+.section-link.dragging {
+  background-color: #e0e0e0;
+  border-color: #888;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.section-link:hover {
+  background-color: #f0f0f0;
+}
+
+.sidebar button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth button hover effect */
+}
+
+.sidebar button:hover {
+  background-color: #0056b3;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Include padding in width/height */
+  margin-left: 240px; /* Adjust margin to make room for fixed sidebar */
+}
+
+.section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.section h3 {
+  margin-top: 0;
+  font-size: 1.25em;
+  color: #444;
+}
+
+.subcategory-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.subcategory-box {
+  flex: 1 1 calc(33.333% - 10px);
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.subcategory-box h4 {
+  margin-top: 0;
+  font-size: 1em;
+}
+
+.company-container {
+  margin-top: 10px;
+}
+
+.company-box {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content */
+}
+
+.company-box:hover {
+  background-color: #f0f0f0;
+}
+
+.company-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain; /* Ensure the logo fits within the bounds */
+  margin-bottom: 5px;
+}
+
+.company-name {
+  font-size: 1em;
+  font-weight: 300; /* Make the font thinner */
+  text-align: center; /* Center the text */
+  margin: 0;
+}
+
+.zoom-0 .section,
+.zoom-0 .subcategory-box,
+.zoom-0 .company-box {
+  font-size: 0.7em;
+}
+
+.zoom-1 .section,
+.zoom-1 .subcategory-box,
+.zoom-1 .company-box {
+  font-size: 0.8em;
+}
+
+.zoom-2 .section,
+.zoom-2 .subcategory-box,
+.zoom-2 .company-box {
+  font-size: 0.9em;
+}
+
+.zoom-3 .section,
+.zoom-3 .subcategory-box,
+.zoom-3 .company-box {
+  font-size: 1em;
+}
+
+.zoom-4 .section,
+.zoom-4 .subcategory-box,
+.zoom-4 .company-box {
+  font-size: 1.1em;
+}
+
+.zoom-5 .section,
+.zoom-5 .subcategory-box,
+.zoom-5 .company-box {
+  font-size: 1.2em;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 10000; /* Ensure it covers the sidebar */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  max-width: 600px; /* Add max-width to prevent over-expansion */
+  max-height: 80vh; /* Ensure it doesn't cover too much */
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .subcategory-box {
+    flex: 0 1 calc(50% - 20px); /* 2 boxes per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .subcategory-box {
+    flex: 0 1 100%; /* 1 box per row on smartphones */
+  }
+}

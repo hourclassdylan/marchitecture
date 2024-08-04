@@ -1,0 +1,13 @@
+/* src/components/Footer.css */
+footer {
+  background-color: #282c34;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  position: relative; /* Ensure it stays at the bottom naturally */
+  bottom: 0;
+  left: 0; /* Ensure it starts from the left edge */
+  right: 0; /* Ensure it spans the entire width */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}

@@ -1,16 +1,10 @@
+// src/supabaseClient.js
 import { createClient } from '@supabase/supabase-js';
 
-// Environment variables
-const supabaseUrl = process.env['REACT_APP_SUPABASE_URL'];
-const supabaseKey = process.env['REACT_APP_SUPABASE_KEY'];
-
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Supabase URL and Key are required');
-}
-
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Fetch all market maps
 export const fetchMarketMaps = async () => {
   const { data, error } = await supabase
     .from('market_maps')
@@ -19,7 +13,6 @@ export const fetchMarketMaps = async () => {
   return data;
 };
 
-// Fetch sections for a specific market map
 export const fetchSections = async (marketMapId) => {
   const { data, error } = await supabase
     .from('sections')
@@ -29,7 +22,6 @@ export const fetchSections = async (marketMapId) => {
   return data;
 };
 
-// Fetch subcategories for a specific section
 export const fetchSubcategories = async (sectionId) => {
   const { data, error } = await supabase
     .from('subcategories')
@@ -39,11 +31,10 @@ export const fetchSubcategories = async (sectionId) => {
   return data;
 };
 
-// Fetch companies for a specific subcategory
 export const fetchCompanies = async (subcategoryId) => {
   const { data, error } = await supabase
     .from('companies')
-    .select('*')
+    .select('id, name, description, year_founded, stage, total_funding, website, image_url')
     .eq('subcategory_id', subcategoryId);
   if (error) throw error;
   return data;
