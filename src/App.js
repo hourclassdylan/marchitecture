@@ -1,35 +1,27 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MarketMaps from './components/MarketMaps';
-import MarketMapDetail from './components/MarketMapDetail'; // Import MarketMapDetail component
+import MarketMapDetail from './components/MarketMapDetail';
 import './App.css';
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Header />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/market-maps" element={<MarketMaps />} />
-            <Route path="/market-maps/:id" element={<MarketMapDetail />} /> {/* Route for MarketMapDetail */}
-          </Routes>
-        </div>
-        <Footer />
+const App = () => (
+  <Router>
+    <div className="App">
+      <Header />
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/market-maps" element={<MarketMaps />} />
+          <Route path="/market-maps/:id" element={<MarketMapDetail />} />
+        </Routes>
       </div>
-    </Router>
-  );
-}
-
-const HomePage = () => (
-  <main>
-    <h2>Welcome to Marchitecture</h2>
-    <p>Your community-oriented web app for market maps.</p>
-  </main>
+      <Footer />
+    </div>
+  </Router>
 );
 
 export default App;

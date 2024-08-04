@@ -1,248 +1,37 @@
 /* src/App.css */
-
-body, html {
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
   margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-}
-
-.App {
+  padding: 0; /* Remove default padding */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ensure full width */
+  min-height: 100vh;
+  box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%; /* Ensure full width */
+}
+
 .content {
   flex: 1;
-}
-
-footer {
-  background-color: #282c34;
-  padding: 10px;
-  color: white;
-  text-align: center;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #282c34;
-  padding: 20px;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-header .logo {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-header nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-}
-
-header nav ul li {
-  margin: 0 10px;
-}
-
-header nav ul li a {
-  color: white;
-  text-decoration: none;
-  padding: 5px 10px;
-  transition: background-color 0.3s, color 0.3s;
-  border-radius: 5px;
-}
-
-header nav ul li a:hover {
-  background-color: #444;
-  color: #ddd;
-}
-
-/* Sidebar styling */
-.sidebar {
-  width: 240px;
-  position: fixed;
-  top: calc(80px + 20px); /* Adjust based on header height and padding */
-  left: 20px;
-  background-color: #ffffff;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: calc(100vh - 160px); /* Full height minus some padding and footer height */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.sidebar h2 {
-  margin: 0;
-  padding: 10px;
-  font-size: 1.4em;
-  text-align: center;
-  width: 100%;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.section-links-container {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow-y: auto;
-}
-
-.section-link {
-  cursor: pointer;
-  padding: 15px;
-  margin: 5px 0;
-  background-color: #e7e7e7;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  text-align: center;
-}
-
-.section-link:hover {
-  background-color: #d5d5d5;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Main content adjustments */
-.main-content {
-  margin-left: 280px; /* Adjust based on sidebar width and its margin */
-  padding: 20px;
-}
-
-.section-container {
-  margin-top: 20px;
-}
-
-.section {
-  background-color: #ffffff;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  position: relative;
-}
-
-.section h3 {
-  font-size: 1.5em;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.subcategory-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.subcategory-box {
-  background-color: #fafafa;
-  padding: 10px;
-  margin: 10px;
-  display: inline-block;
-  width: calc(25% - 20px);
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.subcategory-box:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.subcategory-box h4 {
-  font-size: 1.2em;
-  margin-bottom: 5px;
-}
-
-.company-container {
-  margin-top: 10px;
-}
-
-.company-box {
-  background-color: #ffffff;
-  padding: 5px;
-  margin: 5px 0;
-  display: block;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.company-box p {
-  margin: 5px 0;
-  font-size: 0.9em;
-}
-
-.company-box a {
-  text-decoration: none;
-  color: #007bff;
-  word-break: break-all;
-}
-
-h2 {
-  text-align: center;
-  font-size: 2em;
-  margin: 20px 0;
-  color: #333;
-}
-
-/* MarketMaps page styling */
-.market-maps-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-}
-
-.market-map-box {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  margin: 10px;
-  width: 220px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  text-decoration: none;  /* Ensure links do not have underline */
-  color: inherit;  /* Inherit text color */
-  border-radius: 10px;
-}
-
-.market-map-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.market-map-box h3 {
-  margin-top: 0;
-  font-size: 1.5em;
-  color: #444;
-}
-
-.market-map-box p {
-  margin: 10px 0 0;
-  color: #666;
+  padding-top: 70px; /* Add padding to account for fixed header height */
+  padding-left: 20px; /* Add left padding */
+  padding-right: 20px; /* Add right padding */
+  padding-bottom: 40px; /* Ensure adequate space for the footer */
+  box-sizing: border-box; /* Include padding in width/height */
 }

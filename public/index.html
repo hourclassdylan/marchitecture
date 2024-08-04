@@ -9,10 +9,104 @@
     <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>React App</title>
+    <title>Market Map</title>
+    <link rel="stylesheet" href="src/components/Header.css">
+    <link rel="stylesheet" href="src/components/Home.css">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+        overflow: auto;
+        padding: 0 20px;
+      }
+
+      .main-header {
+        text-align: center;
+        background: #007bff;
+        color: #fff;
+        padding: 50px 0;
+      }
+
+      .main-header h1 {
+        margin-bottom: 0;
+      }
+
+      .home .purpose-section h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      .home .cta {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .home .cta a {
+        padding: 10px 20px;
+        border-radius: 6px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .home .cta a:hover {
+        background-color: #0056b3;
+      }
+
+    </style>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <header>
+      <h1>Market Architecture</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="container">
+      <section id="home" class="home">
+        <div class="main-header">
+          <h2>Welcome to Market Architecture</h2>
+          <p>Your go-to solution for market mapping.</p>
+        </div>
+        <div class="purpose-section">
+          <h2>Our Purpose</h2>
+          <p>
+            Fill this section with a compelling description of what your website or service does.
+          </p>
+        </div>
+        <div class="cta">
+          <a href="#get-started">Get Started</a>
+        </div>
+        <div class="contribute-section">
+          <div class="contribute-box">
+            <h3>Contribute</h3>
+            <button>Join Us</button>
+          </div>
+          <div class="contribute-box">
+            <h3>Learn More</h3>
+            <button>Read More</button>
+          </div>
+          <div class="contribute-box">
+            <h3>Contact</h3>
+            <button>Get in Touch</button>
+          </div>
+        </div>
+      </section>
+      <!-- Add more sections as needed -->
+    </main>
     <div id="root"></div>
   </body>
 </html>
