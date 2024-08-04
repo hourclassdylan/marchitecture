@@ -7,8 +7,7 @@ const Home = () => (
     <h2>Welcome to Marchitecture</h2>
     <div className="purpose-section">
       <p>
-        The Marchitecture website is designed to provide an interactive view of various market maps, their sections, subcategories, and the companies within them.
-        Our goal is to help businesses and individuals navigate market landscapes more effectively.
+        Putting an end to the endlessly redundant market maps by crowdsourcing our efforts into one map per market to rule them all.
       </p>
     </div>
     <h2>Contribute</h2>

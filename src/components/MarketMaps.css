@@ -1,31 +1,69 @@
 /* src/components/MarketMaps.css */
+.market-maps-page {
+  padding: 0px 20px 20px 20px; /* Add padding to avoid overlap with the fixed header and space around the content */
+  text-align: center;
+}
+
+h2 {
+  color: #1f2833;
+  font-size: 2.5em;
+  margin-bottom: 40px;
+}
+
 .market-maps-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px; /* Space between market map boxes */
 }
 
 .market-map-box {
-  width: 80%;
+  background-color: #f5f5f5;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  text-align: left;
+  border-radius: 10px;
+  padding: 20px;
   text-decoration: none;
-  color: black;
+  color: #1f2833;
+  width: 300px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.market-map-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.market-map-box:hover {
+  transform: translateY(-10px); /* Lift effect on hover */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Add shadow for depth */
 }
 
 .market-map-box h3 {
-  margin: 10px 0;
-  font-family: 'Arial', sans-serif;
-  font-weight: bold;
+  margin: 0;
+  font-size: 1.8em;
 }
 
 .market-map-box p {
-  margin-bottom: 10px;
-  font-family: 'Arial', sans-serif;
-  font-size: 0.9em;
+  margin: 0;
   color: #666;
+  font-size: 1em;
+}
+
+button.view-details {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button.view-details:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slight zoom effect on hover */
 }

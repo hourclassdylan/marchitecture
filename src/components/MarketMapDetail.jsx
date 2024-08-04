@@ -160,14 +160,20 @@ const MarketMapDetail = () => {
               key={section.id}
               id={section.id}
               className="section"
-              style={{ backgroundColor: sectionColors[index % sectionColors.length] }}
+              style={{
+                backgroundColor: sectionColors[index % sectionColors.length],
+                transformOrigin: 'top left', // Ensure the scaling works properly
+              }}
             >
               <h3>{section.name}</h3>
-              <div className="subcategory-container">
+              <div className="subcategory-container"
+                   style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))' }}>
                 {subcategories[section.id]?.map((subcategory) => (
                   <div key={subcategory.id} className="subcategory-box">
-                    <h4>{subcategory.name}</h4>
-                    <p>{subcategory.description}</p>
+                    <div className="subcategory-header">
+                      <h4 className="subcategory-title">{subcategory.name}</h4>
+                      <p className="subcategory-description">{subcategory.description}</p>
+                    </div>
                     <div className="company-container">
                       {companies[subcategory.id]?.map((company) => (
                         <div
@@ -175,14 +181,18 @@ const MarketMapDetail = () => {
                           className="company-box"
                           onClick={() => handleCompanyClick(company)}
                         >
-                          {company.image_url && (
-                            <img
-                              src={company.image_url}
-                              alt={company.name}
-                              className="company-logo"
-                            />
-                          )}
-                          <p className="company-name">{company.name}</p>
+                          <div className="company-logo-container">
+                            {company.image_url && (
+                              <img
+                                src={company.image_url}
+                                alt={company.name}
+                                className="company-logo"
+                              />
+                            )}
+                          </div>
+                          <div className="company-name-container">
+                            <p className="company-name">{company.name}</p>
+                          </div>
                         </div>
                       ))}
                     </div>

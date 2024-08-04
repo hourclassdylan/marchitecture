@@ -1,45 +1,59 @@
 /* src/components/Header.css */
-header {
-  background-color: #282c34;
-  color: white;
-  padding: 20px;
-  text-align: center;
+.header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Adjust layout */
   align-items: center;
-  position: fixed;
-  width: calc(100% - 40px); /* Add buffer on the sides */
-  left: 50%;
-  transform: translateX(-50%);
+  padding: 20px;
+  background-color: #1f2833; /* Dark background color */
+  color: white;
+  position: fixed; /* Fix the header at the top */
   top: 0;
-  z-index: 1000;
+  width: 100%;
+  z-index: 1000; /* Ensure it is above other elements */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add subtle shadow */
 }
 
-header h1 {
-  margin: 0;
-  font-size: 1.5em;
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Add space between the logo and the title */
+}
+
+.header-right {
+  display: flex;
+  gap: 20px; /* Space the buttons evenly */
+  justify-content: center; /* Center the buttons */
+  margin-right: 40px; /* Add a clean buffer from the right edge */
+}
+
+.logo {
+  height: 50px; /* Adjust the height as necessary */
+  width: auto;
+}
+
+h1 {
+  font-size: 1.8em; /* Adjust the size as necessary */
+  margin: 0; /* Remove default margin */
 }
 
 nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+  list-style: none;
   display: flex;
-  gap: 15px;
-}
-
-nav li {
-  display: inline;
+  gap: 20px;
+  padding: 0;
+  margin: 0; /* Remove default margin */
 }
 
 nav a {
-  color: white;
+  background-color: #ffffff; /* Button background color */
+  color: #1f2833;
   text-decoration: none;
-  padding: 8px 16px;
-  background-color: #007bff;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1em; /* Font size */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
 nav a:hover {
-  background-color: #0056b3;
+  background-color: #949494; /* Darken on hover */
 }
