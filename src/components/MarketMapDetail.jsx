@@ -61,7 +61,7 @@ const MarketMapDetail = () => {
   const loadCompanies = async (subcategoryId) => {
     const { data, error } = await supabase
       .from('companies')
-      .select('id, name, description, image_url, website, founded_year, stage, funding_raised')  // Adjust the fields as per your requirements
+      .select('id, name, description, image_url, website, founded_year, stage, funding_raised') 
       .eq('subcategory_id', subcategoryId);
     if (error) {
       console.error('Error fetching companies:', error);
@@ -114,6 +114,13 @@ const MarketMapDetail = () => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 1,
     }).format(amount);
+  };
+
+  const ensureHttpUrl = (url) => {
+    if (!/^https?:\/\//i.test(url)) {
+      return 'http://' + url;
+    }
+    return url;
   };
 
   if (loading) return <p>Loading...</p>;
@@ -221,7 +228,7 @@ const MarketMapDetail = () => {
             <p><strong>Year Founded:</strong> {selectedCompany.founded_year}</p>
             <p><strong>Stage:</strong> {selectedCompany.stage}</p>
             <p><strong>Total Funding Raised (mm):</strong> {formatFunding(selectedCompany.funding_raised)}</p>
-            <p><strong>Website:</strong> <a href={selectedCompany.website} target="_blank" rel="noopener noreferrer">{selectedCompany.website}</a></p>
+            <p><strong>Website:</strong> <a href={ensureHttpUrl(selectedCompany.website)} target="_blank" rel="noopener noreferrer">{selectedCompany.website}</a></p>
           </div>
         </div>
       )}

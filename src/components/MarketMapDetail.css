@@ -253,6 +253,18 @@
   cursor: pointer;
 }
 
+.modal a {
+  color: #007bff; /* Button background color */
+  text-decoration: none;
+  padding: 10px;
+  display: inline-block;
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.modal a:hover {
+  color: #0056b3; /* Darken on hover */
+}
+
 @keyframes slide-down {
   from {
     opacity: 0;
