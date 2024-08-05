@@ -1,4 +1,3 @@
-// src/components/MarketMapDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -62,7 +61,7 @@ const MarketMapDetail = () => {
   const loadCompanies = async (subcategoryId) => {
     const { data, error } = await supabase
       .from('companies')
-      .select('id, name, description, image_url')
+      .select('id, name, description, image_url, website, founded_year, stage, funding_raised')  // Adjust the fields as per your requirements
       .eq('subcategory_id', subcategoryId);
     if (error) {
       console.error('Error fetching companies:', error);
@@ -106,6 +105,15 @@ const MarketMapDetail = () => {
 
   const handleModalClose = () => {
     setSelectedCompany(null);
+  };
+
+  const formatFunding = (amount) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 1,
+    }).format(amount);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -209,13 +217,11 @@ const MarketMapDetail = () => {
           <div className="modal-content">
             <span className="close" onClick={handleModalClose}>&times;</span>
             <h2>{selectedCompany.name}</h2>
-            <p><strong>Website:</strong> <a href={selectedCompany.website} target="_blank" rel="noopener noreferrer">{selectedCompany.website}</a></p>
             <p><strong>Description:</strong> {selectedCompany.description}</p>
-            <p><strong>Location:</strong> {selectedCompany.location}</p>
-            <p><strong>Founded:</strong> {selectedCompany.founded}</p>
-            <p><strong>Industry:</strong> {selectedCompany.industry}</p>
-            <p><strong>Employee Count:</strong> {selectedCompany.employee_count}</p>
-            <p><strong>Revenue:</strong> {selectedCompany.revenue}</p>
+            <p><strong>Year Founded:</strong> {selectedCompany.founded_year}</p>
+            <p><strong>Stage:</strong> {selectedCompany.stage}</p>
+            <p><strong>Total Funding Raised (mm):</strong> {formatFunding(selectedCompany.funding_raised)}</p>
+            <p><strong>Website:</strong> <a href={selectedCompany.website} target="_blank" rel="noopener noreferrer">{selectedCompany.website}</a></p>
           </div>
         </div>
       )}

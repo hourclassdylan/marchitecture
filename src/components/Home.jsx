@@ -20,13 +20,6 @@ const Home = () => (
         <button>Add Company</button>
       </div>
       <div className="contribute-box">
-        <h3>Edit</h3>
-        <button>Edit Market Map</button>
-        <button>Edit Section</button>
-        <button>Edit Subcategory</button>
-        <button>Edit Company</button>
-      </div>
-      <div className="contribute-box">
         <h3>Delete</h3>
         <button>Delete Market Map</button>
         <button>Delete Section</button>
